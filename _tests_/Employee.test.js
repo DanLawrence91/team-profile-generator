@@ -12,18 +12,20 @@ describe('Employee', () => {
 
     it('should throw an error if provided no arguments', () => {
       const cb = () => new Employee();
-      const err = new Error(
-        "Expected parameters 'Name', 'ID', and 'Email' are needed"
-      );
-      expect(cb).toThrowError(err);
+
+      expect(cb).toThrow();
     });
 
     it('should throw an error if not provided an ID or email', () => {
-      const cb = () => new Employee('Sarah');
-      const err = new Error(
-        "Expected parameter 'ID' to be a non-negative number and 'Email' to be an email address"
-      );
-      expect(cb).toThrowError(err);
+      const cb = () => new Employee('Dan');
+
+      expect(cb).toThrow();
+    });
+
+    it('should throw an error if not provided an email', () => {
+      const cb = () => new Employee('Dan', 1);
+
+      expect(cb).toThrow();
     });
 
     it("should throw an error if 'name' is not a string", () => {
@@ -60,11 +62,6 @@ describe('Employee', () => {
       );
 
       expect(cb).toThrowError(err);
-    });
-
-    it("should be a proper email address in 'email", () => {
-      const employee = new Employee('Dan', 1, 'dan@test.com');
-      expect(employee.email).toContain('@');
     });
   });
 });
