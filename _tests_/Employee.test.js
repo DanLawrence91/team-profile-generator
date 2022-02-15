@@ -63,5 +63,12 @@ describe('Employee', () => {
 
       expect(cb).toThrowError(err);
     });
+
+    it("should throw an error if 'Email' does not contain @", () => {
+      const cb = () => new Employee('Dan', 1, 'hello');
+      const err = new Error('This must be a proper email address');
+
+      expect(cb).toThrowError(err);
+    });
   });
 });
