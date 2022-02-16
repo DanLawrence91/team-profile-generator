@@ -7,6 +7,10 @@ const fs = require('fs');
 
 const members = [];
 
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
+}
+
 const basicQuestions = [
   {
     type: 'input',
@@ -40,13 +44,6 @@ const basicQuestions = [
     },
   },
   {
-    type: 'confirm',
-    name: 'manager',
-    message: 'Are you a manager?',
-  },
-];
-const managerQuestions = [
-  {
     type: 'input',
     name: 'officeNumber',
     message: 'What is your office number?',
@@ -62,7 +59,39 @@ const managerQuestions = [
     choices: ['Engineer', 'Intern', 'Finish'],
   },
 ];
+
 const engineerQuestions = [
+  {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name?',
+    validate: (name) => {
+      return name ? true : 'Please add a name';
+    },
+  },
+  {
+    type: 'input',
+    name: 'id',
+    message: 'What is the your ID?',
+    validate: (id) => {
+      var valid = !isNaN(id);
+      return valid ? true : 'Please enter a valid ID as a number';
+    },
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'What is the your email?',
+    validate: function (email) {
+      valid = email.indexOf('@');
+
+      if (valid !== -1) {
+        return true;
+      } else {
+        return 'Please enter a valid email';
+      }
+    },
+  },
   {
     type: 'input',
     name: 'github',
@@ -78,7 +107,54 @@ const engineerQuestions = [
     choices: ['Engineer', 'Intern', 'Finish'],
   },
 ];
+
+function askEngineerQuestions() {
+  inquirer.prompt(engineerQuestions).then((data) => {
+    const engineer = new Engineer(data.name, data.id, data.email, data.github);
+    console.log(engineer.getRole());
+    members.push(engineer);
+    if (data.add == 'Engineer') {
+      askEngineerQuestions();
+    } else if (data.add == 'Intern') {
+      askInternQuestions();
+    } else if (data.add == 'Finish') {
+      writeToFile('test.md', members);
+    }
+  });
+}
+
 const internQuestions = [
+  {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name?',
+    validate: (name) => {
+      return name ? true : 'Please add a name';
+    },
+  },
+  {
+    type: 'input',
+    name: 'id',
+    message: 'What is the your ID?',
+    validate: (id) => {
+      var valid = !isNaN(id);
+      return valid ? true : 'Please enter a valid ID as a number';
+    },
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'What is the your email?',
+    validate: function (email) {
+      valid = email.indexOf('@');
+
+      if (valid !== -1) {
+        return true;
+      } else {
+        return 'Please enter a valid email';
+      }
+    },
+  },
   {
     type: 'input',
     name: 'school',
@@ -95,49 +171,38 @@ const internQuestions = [
   },
 ];
 
-function writeToFile(fileName, data) {
-  return fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
+function askInternQuestions() {
+  inquirer.prompt(internQuestions).then((data) => {
+    const intern = new Intern(data.name, data.id, data.email, data.school);
+    console.log(intern.getRole());
+    members.push(intern);
+    if (data.add == 'Engineer') {
+      askEngineerQuestions();
+    } else if (data.add == 'Intern') {
+      askInternQuestions();
+    } else if (data.add == 'Finish') {
+      writeToFile('test.md', members);
+    }
+  });
 }
 
-// TODO: Create a function to initialize app
-function init() {
-  inquirer
-    .prompt(generatorQuestions)
-    .then((data) => {
-      const manager = new Manager(
-        data.name,
-        data.id,
-        data.email,
-        data.officeNumber
-      );
-      console.log(manager.getRole());
-      members.push(manager);
-      if (data.employee === 'Engineer') {
-        const engineer = new Engineer(
-          data.name,
-          data.id,
-          data.email,
-          data.github
-        );
-        console.log(engineer.getRole());
-        members.push(engineer);
-      } else if (data.employee === 'Intern') {
-        const intern = new Intern(data.name, data.id, data.email, data.school);
-        console.log(intern.getRole());
-        members.push(intern);
-      } else if (data.employee === 'Finish' || data.newEmployee === 'Finish') {
-        return writeToFile('test.md', members);
-      }
-
-      // console.log(members);
-      // console.log(data.job);
-      // console.log(data.name);
-      // console.log(data.id);
-      // console.log(data.email);
-      // console.log(data.choice);
-    })
-    .catch((err) => console.error(err));
-}
-
-// Function call to initialize app
-init();
+inquirer
+  .prompt(basicQuestions)
+  .then((data) => {
+    const manager = new Manager(
+      data.name,
+      data.id,
+      data.email,
+      data.officeNumber
+    );
+    console.log(manager.getRole());
+    members.push(manager);
+    if (data.add == 'Engineer') {
+      askEngineerQuestions();
+    } else if (data.add == 'Intern') {
+      askInternQuestions();
+    } else if (data.add == 'Finish') {
+      writeToFile('test.md', members);
+    }
+  })
+  .catch((err) => console.error(err));
