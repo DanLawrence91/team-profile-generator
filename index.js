@@ -8,12 +8,12 @@ const fs = require('fs');
 const members = [];
 
 const generatorQuestions = [
-  {
-    type: 'list',
-    name: 'job',
-    message: 'What is your role?',
-    choices: ['Manager', 'Engineer', 'Intern'],
-  },
+  //   {
+  //     type: 'list',
+  //     name: 'job',
+  //     message: 'What is your role?',
+  //     choices: ['Manager', 'Engineer', 'Intern'],
+  //   },
   {
     type: 'input',
     name: 'name',
@@ -53,7 +53,58 @@ const generatorQuestions = [
       var valid = !isNaN(officeNumber);
       return valid ? true : 'Please enter a valid office number as a number';
     },
-    when: (answers) => answers.job === 'Manager',
+  },
+  {
+    type: 'list',
+    name: 'employee',
+    message: 'Do you want to add an engineer, intern or finish?',
+    choices: ['Engineer', 'Intern', 'Finish'],
+  },
+  {
+    type: 'input',
+    name: 'empName',
+    message: 'What is their name?',
+    validate: (empName) => {
+      return empName ? true : 'Please add their name';
+    },
+    when: (answers) =>
+      answers.employee === 'Engineer' ||
+      answers.employee === 'Intern' ||
+      answers.newEmployee === 'Engineer' ||
+      answers.newEmployee === 'Intern',
+  },
+  {
+    type: 'input',
+    name: 'empID',
+    message: 'What is their ID?',
+    validate: (empID) => {
+      var valid = !isNaN(empID);
+      return valid ? true : 'Please enter a valid ID as a number';
+    },
+    when: (answers) =>
+      answers.employee === 'Engineer' ||
+      answers.employee === 'Intern' ||
+      answers.newEmployee === 'Engineer' ||
+      answers.newEmployee === 'Intern',
+  },
+  {
+    type: 'input',
+    name: 'empEmail',
+    message: 'What is the their email?',
+    validate: function (empEmail) {
+      valid = empEmail.indexOf('@');
+
+      if (valid !== -1) {
+        return true;
+      } else {
+        return 'Please enter a valid email';
+      }
+    },
+    when: (answers) =>
+      answers.employee === 'Engineer' ||
+      answers.employee === 'Intern' ||
+      answers.newEmployee === 'Engineer' ||
+      answers.newEmployee === 'Intern',
   },
   {
     type: 'input',
@@ -62,7 +113,8 @@ const generatorQuestions = [
     validate: (github) => {
       return github ? true : 'Please add a Github username';
     },
-    when: (answers) => answers.job === 'Engineer',
+    when: (answers) =>
+      answers.employee === 'Engineer' || answers.newEmployee === 'Engineer',
   },
   {
     type: 'input',
@@ -71,12 +123,19 @@ const generatorQuestions = [
     validate: (school) => {
       return school ? true : 'Please add a school';
     },
-    when: (answers) => answers.job === 'Intern',
+    when: (answers) =>
+      answers.employee === 'Intern' || answers.newEmployee === 'Intern',
   },
   {
-    type: 'confirm',
-    name: 'choice',
-    message: 'Do you want to add another team member?',
+    type: 'list',
+    name: 'newEmployee',
+    message: 'Do you want to add an another engineer, intern or finish?',
+    choices: ['Engineer', 'Intern', 'Finish'],
+    when: (answers) =>
+      answers.employee === 'Engineer' ||
+      answers.employee === 'Intern' ||
+      answers.newEmployee === 'Engineer' ||
+      answers.newEmployee === 'Intern',
   },
 ];
 
@@ -89,14 +148,29 @@ function init() {
   inquirer
     .prompt(generatorQuestions)
     .then((data) => {
-      if (data.job === 'Manager') {
-        members.push(
-          new Manager(data.name, data.id, data.email, data.officeNumber)
+      const manager = new Manager(
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
+      );
+      console.log(manager.getRole());
+      members.push(manager);
+      if (data.employee === 'Engineer') {
+        const engineer = new Engineer(
+          data.name,
+          data.id,
+          data.email,
+          data.github
         );
-      } else if (data.job === 'Engineer') {
-        members.push(new Engineer(data.name, data.id, data.email, data.github));
-      } else if (data.job === 'Intern') {
-        members.push(new Intern(data.name, data.id, data.email, data.school));
+        console.log(engineer.getRole());
+        members.push(engineer);
+      } else if (data.employee === 'Intern') {
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        console.log(intern.getRole());
+        members.push(intern);
+      } else if (data.employee === 'Finish' || data.newEmployee === 'Finish') {
+        return writeToFile('test.md', members);
       }
 
       // console.log(members);
@@ -105,13 +179,6 @@ function init() {
       // console.log(data.id);
       // console.log(data.email);
       // console.log(data.choice);
-
-      if (data.choice) {
-        init();
-      } else {
-        //create file here
-        return writeToFile('test.md', members);
-      }
     })
     .catch((err) => console.error(err));
 }

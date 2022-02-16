@@ -28,11 +28,10 @@
       <div class="card-deck">
         <div id="manager">
           <div class="card">
-            <div class="card-body card-title bg-primary">
-              ${data.name}<br />${data.job}
-              <!-- <h4 class="card-title bg-primary">
-                ${data.name}<br />${data.job}
-              </h4> -->
+            <div class="card-body">
+              <h4 class="card-title bg-primary">
+                ${data.name}<br />${manager.getRole()}
+              </h4>
               <ul class="list-group">
                 <li class="list-group-item">${data.id}</li>
                 <li class="list-group-item">
@@ -47,7 +46,7 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-title bg-primary">
-                ${data.name}<br />${data.job}
+                ${data.name}<br />${engineer.getRole()}
               </h4>
               <ul class="list-group">
                 <li class="list-group-item">${data.id}</li>
@@ -65,7 +64,7 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-title bg-primary">
-                ${data.name}<br />${data.job}
+                ${data.name}<br />${intern.getRole()}
               </h4>
               <ul class="list-group">
                 <li class="list-group-item">${data.id}</li>
