@@ -10,10 +10,6 @@ const fs = require('fs');
 // const internArray = [];
 const members = [];
 
-function writeToFile(fileName, data) {
-  return fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
-}
-
 const generateHTML = () =>
   `<!DOCTYPE html>
 <html lang="en">
@@ -223,7 +219,7 @@ function askEngineerQuestions() {
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      writeToFile('index.html', generateHTML());
+      fs.writeFileSync('index.html', generateHTML(members));
       console.log(members);
     }
   });
@@ -288,7 +284,7 @@ function askInternQuestions() {
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      writeToFile('index.html', generateHTML());
+      fs.writeFileSync('index.html', generateHTML(members));
       console.log(members);
     }
   });
@@ -311,7 +307,7 @@ inquirer
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      writeToFile('index.html', generateHTML());
+      fs.writeFileSync('index.html', generateHTML(members));
       console.log(members);
     }
   })
