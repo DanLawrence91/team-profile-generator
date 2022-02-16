@@ -13,6 +13,7 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <!-- when html is generated there should be a header saying team name followed 
         by cards below with individual information for each team member -->
@@ -22,6 +23,62 @@
         <h1 class="display-3 text-center">Team Name</h1>
       </div>
     </header>
+
+    <div class="d-flex justify-content-center">
+      <div class="card-deck">
+        <div id="manager">
+          <div class="card">
+            <div class="card-body card-title bg-primary">
+              ${data.name}<br />${data.job}
+              <!-- <h4 class="card-title bg-primary">
+                ${data.name}<br />${data.job}
+              </h4> -->
+              <ul class="list-group">
+                <li class="list-group-item">${data.id}</li>
+                <li class="list-group-item">
+                  <a href="mailto:${data.email}">${data.email}</a>
+                </li>
+                <li class="list-group-item">${data.officeNumber}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="engineer">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title bg-primary">
+                ${data.name}<br />${data.job}
+              </h4>
+              <ul class="list-group">
+                <li class="list-group-item">${data.id}</li>
+                <li class="list-group-item">
+                  <a href="mailto:${data.email}">${data.email}</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="https://github.com/${data.github}">${data.github}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="intern">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title bg-primary">
+                ${data.name}<br />${data.job}
+              </h4>
+              <ul class="list-group">
+                <li class="list-group-item">${data.id}</li>
+                <li class="list-group-item">
+                  <a href="mailto:${data.email}">${data.email}</a>
+                </li>
+                <li class="list-group-item">${data.school}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

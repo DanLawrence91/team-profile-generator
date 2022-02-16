@@ -1,4 +1,3 @@
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -36,12 +35,15 @@ const generatorQuestions = [
     type: 'input',
     name: 'email',
     message: 'What is the your email?',
-    validate: (email) => {
-      return email
-        ? true && email.indexOf('@') !== -1
-        : 'Please use a valid email address';
+    validate: function (email) {
+      valid = email.indexOf('@');
+
+      if (valid !== -1) {
+        return true;
+      } else {
+        return 'Please enter a valid email';
+      }
     },
-    //need to sort validate
   },
   {
     type: 'input',
