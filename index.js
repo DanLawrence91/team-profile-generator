@@ -7,13 +7,7 @@ const fs = require('fs');
 
 const members = [];
 
-const generatorQuestions = [
-  //   {
-  //     type: 'list',
-  //     name: 'job',
-  //     message: 'What is your role?',
-  //     choices: ['Manager', 'Engineer', 'Intern'],
-  //   },
+const basicQuestions = [
   {
     type: 'input',
     name: 'name',
@@ -46,6 +40,13 @@ const generatorQuestions = [
     },
   },
   {
+    type: 'confirm',
+    name: 'manager',
+    message: 'Are you a manager?',
+  },
+];
+const managerQuestions = [
+  {
     type: 'input',
     name: 'officeNumber',
     message: 'What is your office number?',
@@ -56,56 +57,12 @@ const generatorQuestions = [
   },
   {
     type: 'list',
-    name: 'employee',
-    message: 'Do you want to add an engineer, intern or finish?',
+    name: 'add',
+    message: 'Do you want to add an engineer, an intern or finish',
     choices: ['Engineer', 'Intern', 'Finish'],
   },
-  {
-    type: 'input',
-    name: 'empName',
-    message: 'What is their name?',
-    validate: (empName) => {
-      return empName ? true : 'Please add their name';
-    },
-    when: (answers) =>
-      answers.employee === 'Engineer' ||
-      answers.employee === 'Intern' ||
-      answers.newEmployee === 'Engineer' ||
-      answers.newEmployee === 'Intern',
-  },
-  {
-    type: 'input',
-    name: 'empID',
-    message: 'What is their ID?',
-    validate: (empID) => {
-      var valid = !isNaN(empID);
-      return valid ? true : 'Please enter a valid ID as a number';
-    },
-    when: (answers) =>
-      answers.employee === 'Engineer' ||
-      answers.employee === 'Intern' ||
-      answers.newEmployee === 'Engineer' ||
-      answers.newEmployee === 'Intern',
-  },
-  {
-    type: 'input',
-    name: 'empEmail',
-    message: 'What is the their email?',
-    validate: function (empEmail) {
-      valid = empEmail.indexOf('@');
-
-      if (valid !== -1) {
-        return true;
-      } else {
-        return 'Please enter a valid email';
-      }
-    },
-    when: (answers) =>
-      answers.employee === 'Engineer' ||
-      answers.employee === 'Intern' ||
-      answers.newEmployee === 'Engineer' ||
-      answers.newEmployee === 'Intern',
-  },
+];
+const engineerQuestions = [
   {
     type: 'input',
     name: 'github',
@@ -113,9 +70,15 @@ const generatorQuestions = [
     validate: (github) => {
       return github ? true : 'Please add a Github username';
     },
-    when: (answers) =>
-      answers.employee === 'Engineer' || answers.newEmployee === 'Engineer',
   },
+  {
+    type: 'list',
+    name: 'add',
+    message: 'Do you want to add an engineer, an intern or finish',
+    choices: ['Engineer', 'Intern', 'Finish'],
+  },
+];
+const internQuestions = [
   {
     type: 'input',
     name: 'school',
@@ -123,19 +86,12 @@ const generatorQuestions = [
     validate: (school) => {
       return school ? true : 'Please add a school';
     },
-    when: (answers) =>
-      answers.employee === 'Intern' || answers.newEmployee === 'Intern',
   },
   {
     type: 'list',
-    name: 'newEmployee',
-    message: 'Do you want to add an another engineer, intern or finish?',
+    name: 'add',
+    message: 'Do you want to add an engineer, an intern or finish',
     choices: ['Engineer', 'Intern', 'Finish'],
-    when: (answers) =>
-      answers.employee === 'Engineer' ||
-      answers.employee === 'Intern' ||
-      answers.newEmployee === 'Engineer' ||
-      answers.newEmployee === 'Intern',
   },
 ];
 
