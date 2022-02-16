@@ -5,7 +5,10 @@ const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const members = [];
+const managerArray = [];
+const engineerArray = [];
+const internArray = [];
+let members;
 
 function writeToFile(fileName, data) {
   return fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
@@ -112,13 +115,15 @@ function askEngineerQuestions() {
   inquirer.prompt(engineerQuestions).then((data) => {
     const engineer = new Engineer(data.name, data.id, data.email, data.github);
     console.log(engineer.getRole());
-    members.push(engineer);
+    engineerArray.push(engineer);
+    members = [...managerArray, ...engineerArray, ...internArray];
     if (data.add == 'Engineer') {
       askEngineerQuestions();
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
       writeToFile('test.md', members);
+      console.log(members);
     }
   });
 }
@@ -175,13 +180,15 @@ function askInternQuestions() {
   inquirer.prompt(internQuestions).then((data) => {
     const intern = new Intern(data.name, data.id, data.email, data.school);
     console.log(intern.getRole());
-    members.push(intern);
+    internArray.push(intern);
+    members = [...managerArray, ...engineerArray, ...internArray];
     if (data.add == 'Engineer') {
       askEngineerQuestions();
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
       writeToFile('test.md', members);
+      console.log(members);
     }
   });
 }
@@ -196,13 +203,15 @@ inquirer
       data.officeNumber
     );
     console.log(manager.getRole());
-    members.push(manager);
+    managerArray.push(manager);
+    members = [...managerArray, ...engineerArray, ...internArray];
     if (data.add == 'Engineer') {
       askEngineerQuestions();
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
       writeToFile('test.md', members);
+      console.log(members);
     }
   })
   .catch((err) => console.error(err));
