@@ -6,6 +6,8 @@ const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+const members = [];
+
 const generatorQuestions = [
   {
     type: 'list',
@@ -35,8 +37,11 @@ const generatorQuestions = [
     name: 'email',
     message: 'What is the your email?',
     validate: (email) => {
-      return email ? email.indexOf('@') !== -1 : 'Please use a valid email';
+      return email
+        ? email.indexOf('@') !== -1
+        : 'Please use a valid email address';
     },
+    //need to sort validate
   },
   {
     type: 'input',
@@ -74,15 +79,38 @@ const generatorQuestions = [
 ];
 
 function writeToFile(fileName, data) {
-  return fs.writeFileSync(fileName, data);
+  return fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
 }
 
 // TODO: Create a function to initialize app
 function init() {
   inquirer
     .prompt(generatorQuestions)
-    .then((data) => writeToFile('test.md', JSON.stringify(data)))
-    .then(() => console.log('test creation successful'))
+    .then((data) => {
+      if (data.job === 'Manager') {
+        members.push(
+          new Manager(data.name, data.id, data.email, data.officeNumber)
+        );
+      } else if (data.job === 'Engineer') {
+        members.push(new Engineer(data.name, data.id, data.email, data.github));
+      } else if (data.job === 'Intern') {
+        members.push(new Intern(data.name, data.id, data.email, data.school));
+      }
+
+      console.log(members);
+      //   console.log(data.job);
+      //   console.log(data.name);
+      //   console.log(data.id);
+      //   console.log(data.email);
+      //   console.log(data.choice);
+
+      if (data.choice) {
+        init();
+      } else {
+        //create file here
+        return writeToFile('test.md', members);
+      }
+    })
     .catch((err) => console.error(err));
 }
 

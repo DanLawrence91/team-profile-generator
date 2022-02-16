@@ -44,7 +44,7 @@ describe('Employee', () => {
   });
 
   it("should throw an error if 'ID' is not a number", () => {
-    const cb = () => new Employee('Dan', '2', 'dan@test.com');
+    const cb = () => new Employee('Dan', 'hello', 'dan@test.com');
     const err = new Error(
       "Expected parameter 'ID' to be a non-negative number"
     );
