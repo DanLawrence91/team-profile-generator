@@ -66,9 +66,6 @@ const generatorQuestions = [
     },
     when: (answers) => answers.job === 'Intern',
   },
-];
-
-const newMember = [
   {
     type: 'confirm',
     name: 'choice',
@@ -84,7 +81,6 @@ function writeToFile(fileName, data) {
 function init() {
   inquirer
     .prompt(generatorQuestions)
-    .then(newMember)
     .then((data) => writeToFile('test.md', JSON.stringify(data)))
     .then(() => console.log('test creation successful'))
     .catch((err) => console.error(err));
