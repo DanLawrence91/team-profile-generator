@@ -38,7 +38,7 @@ const generatorQuestions = [
     message: 'What is the your email?',
     validate: (email) => {
       return email
-        ? email.indexOf('@') !== -1
+        ? true && email.indexOf('@') !== -1
         : 'Please use a valid email address';
     },
     //need to sort validate
@@ -97,12 +97,12 @@ function init() {
         members.push(new Intern(data.name, data.id, data.email, data.school));
       }
 
-      console.log(members);
-      //   console.log(data.job);
-      //   console.log(data.name);
-      //   console.log(data.id);
-      //   console.log(data.email);
-      //   console.log(data.choice);
+      // console.log(members);
+      // console.log(data.job);
+      // console.log(data.name);
+      // console.log(data.id);
+      // console.log(data.email);
+      // console.log(data.choice);
 
       if (data.choice) {
         init();
