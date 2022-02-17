@@ -37,6 +37,10 @@ After the tests have been run by typing npm test into command line the following
 
 ## Walkthrough Video
 
+Please click this [link](https://drive.google.com/file/d/1x1TGTOOGfi31lq7f4rcT_gj_E_pEf9RG/view?usp=sharing) to watch a walkthrough video on how to start the app from the command line and run any tests.
+
+The sample html created from the walkthrough video can be found in the dist folder under index.html
+
 ## Questions
 
 Please direct all questions to [Dan Lawrence](https://github.com/DanLawrence91)
