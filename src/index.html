@@ -19,66 +19,58 @@
 
     <header class="jumbotron jumbotron-fluid bg-warning">
       <div class="container">
-        <h1 class="display-3 text-center">Team Name</h1>
+        <h1 class="display-3 text-center">My Team</h1>
       </div>
     </header>
 
     <div class="d-flex justify-content-center">
       <div class="card-deck">
-        <div id="manager">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title bg-primary">
-                ${manager.getName()}<br />${manager.getRole()}
-              </h4>
-              <ul class="list-group">
-                <li class="list-group-item">${manager.getID()}</li>
-                <li class="list-group-item">
-                  <a href="mailto:${manager.getEmail()}"
-                    >${manager.getEmail()}</a
-                  >
-                </li>
-                <li class="list-group-item">${manager.getOfficeNumber()}</li>
-              </ul>
-            </div>
+        <div class="card bg-light shadow">
+          <div class="p-0 card-body">
+            <h4 class="p-2 card-title bg-primary">
+              ${manager.getName()}<br />${manager.getRole()}
+            </h4>
+            <ul class="list-group p-4">
+              <li class="list-group-item">${manager.getID()}</li>
+              <li class="list-group-item">
+                <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
+              </li>
+              <li class="list-group-item">${manager.getOfficeNumber()}</li>
+            </ul>
           </div>
         </div>
-        <div id="engineer">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title bg-primary">
-                ${engineer.getName}<br />${engineer.getRole()}
-              </h4>
-              <ul class="list-group">
-                <li class="list-group-item">${engineer.getID()}</li>
-                <li class="list-group-item">
-                  <a href="mailto:${engineer.getEmail()}"
-                    >${engineer.getEmail()}</a
-                  >
-                </li>
-                <li class="list-group-item">
-                  <a href="https://github.com/${engineer.getGithub()}"
-                    >${engineer.getGithub()}</a
-                  >
-                </li>
-              </ul>
-            </div>
+        <div class="card bg-light shadow">
+          <div class="card-body p-0">
+            <h4 class="p-2 card-title bg-primary">
+              ${engineer.getName()}<br />${engineer.getRole()}
+            </h4>
+            <ul class="list-group p-4">
+              <li class="list-group-item">${engineer.getID()}</li>
+              <li class="list-group-item">
+                <a href="mailto:${engineer.getEmail()}"
+                  >${engineer.getEmail()}</a
+                >
+              </li>
+              <li class="list-group-item">
+                <a href="https://github.com/${engineer.getGithub()}"
+                  >${engineer.getGithub()}</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
-        <div id="intern">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title bg-primary">
-                ${intern.getName()}<br />${intern.getRole()}
-              </h4>
-              <ul class="list-group">
-                <li class="list-group-item">${intern.getID()}</li>
-                <li class="list-group-item">
-                  <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
-                </li>
-                <li class="list-group-item">${intern.getSchool()}</li>
-              </ul>
-            </div>
+        <div class="card bg-light shadow">
+          <div class="card-body p-0">
+            <h4 class="p-2 card-title bg-primary">
+              ${intern.getName()}<br />${intern.getRole()}
+            </h4>
+            <ul class="list-group p-4">
+              <li class="list-group-item">${intern.getID()}</li>
+              <li class="list-group-item">
+                <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
+              </li>
+              <li class="list-group-item">${intern.getSchool()}</li>
+            </ul>
           </div>
         </div>
       </div>

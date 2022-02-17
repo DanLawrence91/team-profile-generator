@@ -9,63 +9,54 @@ const members = [];
 const finalHTMLArr = [];
 
 function managerHTML(manager) {
-  return `<div class="card-deck">
-    <div id="manager">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title bg-primary">
-            ${manager.getName()}<br />${manager.getRole()}
-          </h4>
-          <ul class="list-group">
-            <li class="list-group-item">ID: ${manager.getID()}</li>
-            <li class="list-group-item">Email: 
-              <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
-            </li>
-            <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
-          </ul>
-        </div>
-      </div>
-    </div>`;
+  return `
+            <div class="col-4 mb-5">
+            <div class="card h-100 bg-light shadow">
+              <div class="card-body p-0">
+                <h4 class="card-title bg-primary p-2">${manager.getName()}<br />${manager.getRole()}</h4>
+                <ul class="list-group p-4">
+                  <li class="list-group-item">ID: ${manager.getID()}</li>
+                  <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+                  <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+  `;
 }
 
 function engineerHTML(engineer) {
-  return `<div id="engineer">
-        <div class="card">
-        <div class="card-body">
-            <h4 class="card-title bg-primary">
-            ${engineer.getName()}<br />${engineer.getRole()}
-            </h4>
-            <ul class="list-group">
-            <li class="list-group-item">ID: ${engineer.getID()}</li>
-            <li class="list-group-item"> Email: 
-                <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
-            </li>
-            <li class="list-group-item"> GitHub: 
-                <a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </div>`;
+  return `
+          <div class="col-4 mb-5">
+          <div class="card h-100 bg-light shadow">
+            <div class="card-body p-0">
+              <h4 class="card-title bg-primary p-2">${engineer.getName()}<br />${engineer.getRole()}</h4>
+              <ul class="list-group p-4">
+                <li class="list-group-item">ID: ${engineer.getID()}</li>
+                <li class="list-group-item"> Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                <li class="list-group-item"> GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></li>
+              </ul>
+            </div>
+            </div>
+          </div>
+          `;
 }
 
 function internHTML(intern) {
-  return `<div id="intern">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title bg-primary">
-          ${intern.getName()}<br />${intern.getRole()}
-        </h4>
-        <ul class="list-group">
-          <li class="list-group-item">ID: ${intern.getID()}</li>
-          <li class="list-group-item">Email: 
-            <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
-          </li>
-          <li class="list-group-item">School: ${intern.getSchool()}</li>
-        </ul>
-      </div>
-    </div>
-  </div>`;
+  return `
+          <div class="col-4 mb-5">
+            <div class="card h-100 bg-light shadow">
+            <div class="card-body p-0">
+              <h4 class="card-title bg-primary p-2">${intern.getName()}<br />${intern.getRole()}</h4>
+              <ul class="list-group p-4">
+                <li class="list-group-item">ID: ${intern.getID()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+                <li class="list-group-item">School: ${intern.getSchool()}</li>
+              </ul>
+            </div>
+            </div>
+          </div>
+  `;
 }
 
 function allEmpsHTML(finalArr) {
@@ -88,11 +79,15 @@ function allEmpsHTML(finalArr) {
     
         <header class="jumbotron jumbotron-fluid bg-warning">
           <div class="container">
-            <h1 class="display-3 text-center">Team Name</h1>
+            <h1 class="display-3 text-center">My Team</h1>
           </div>
         </header>
-        <div class="d-flex justify-content-center">
-            ${finalArr}
+        <div class="container">
+          <div class="row">
+            <div class="d-flex justify-content-center flex-wrap">
+                ${finalArr}
+            </div>
+          </div>
         </div>
     
         <script
@@ -128,7 +123,7 @@ function generateHTML(arr) {
     }
   }
   //   console.log(finalHTMLArr);
-  return allEmpsHTML(finalHTMLArr.join(''));
+  return allEmpsHTML(finalHTMLArr.join(' '));
 }
 
 const basicQuestions = [
