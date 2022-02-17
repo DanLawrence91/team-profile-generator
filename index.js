@@ -13,7 +13,7 @@ function managerHTML(manager) {
             <div class="col-4 mb-5">
             <div class="card h-100 bg-light shadow">
               <div class="card-body p-0">
-                <h4 class="card-title bg-primary p-2">${manager.getName()}<br />${manager.getRole()}</h4>
+                <h4 class="card-title bg-primary p-4">${manager.getName()}<br />${manager.getRole()}</h4>
                 <ul class="list-group p-4">
                   <li class="list-group-item">ID: ${manager.getID()}</li>
                   <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
@@ -30,7 +30,7 @@ function engineerHTML(engineer) {
           <div class="col-4 mb-5">
           <div class="card h-100 bg-light shadow">
             <div class="card-body p-0">
-              <h4 class="card-title bg-primary p-2">${engineer.getName()}<br />${engineer.getRole()}</h4>
+              <h4 class="card-title bg-primary p-4">${engineer.getName()}<br />${engineer.getRole()}</h4>
               <ul class="list-group p-4">
                 <li class="list-group-item">ID: ${engineer.getID()}</li>
                 <li class="list-group-item"> Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
@@ -47,7 +47,7 @@ function internHTML(intern) {
           <div class="col-4 mb-5">
             <div class="card h-100 bg-light shadow">
             <div class="card-body p-0">
-              <h4 class="card-title bg-primary p-2">${intern.getName()}<br />${intern.getRole()}</h4>
+              <h4 class="card-title bg-primary p-4">${intern.getName()}<br />${intern.getRole()}</h4>
               <ul class="list-group p-4">
                 <li class="list-group-item">ID: ${intern.getID()}</li>
                 <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
