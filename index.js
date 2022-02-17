@@ -83,10 +83,8 @@ function allEmpsHTML(finalArr) {
           </div>
         </header>
         <div class="container">
-          <div class="row">
-            <div class="d-flex justify-content-center flex-wrap">
-                ${finalArr}
-            </div>
+          <div class="row d-flex justify-content-center flex-wrap">
+              ${finalArr}
           </div>
         </div>
     

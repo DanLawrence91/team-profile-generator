@@ -10,8 +10,33 @@ This project relies on node.js as its runtime environment so that will need to b
 
 ## Usage
 
-To start the app please type node index.js which will display the first prompt. Answer the questions as they appear by either typing the answer for an input or selecting the relevant option from the list. All questions are validated so a response must be added, with other validations in place so that numbers are added for id only and actual email addresses are used. Once all questions and team members have been added please select finish and the html will be generated
+To start the app please type node index.js which will display the first prompt.
+
+![Screenshot on how to start app](./assets/README1.png)
+
+Answer the questions as they appear by either typing the answer for an input or selecting the relevant option from the list. All questions are validated so a response must be added, with other validations in place so that numbers are added for id only and actual email addresses are used as shown below.
+
+![Screenshot of questions being answered with validations showing for id](./assets/README2.png)
+![Screenshot of questions being answered with validations showing for id](./assets/README3.png)
+
+Once all questions have been answered for the manager you can choose which type of team members to add or whether to finish.
+
+![Screenshot of options to add new members or finish](./assets/README4.png)
+
+After all team members added and finish is selected this is the final output of the html document
+
+![Screenshot of html final document with all information](./assets/README5.png)
 
 ## Tests
 
 Once npm install has been ran to install the dependencies for this project please run npm test and the tests will run for this project
+
+After the tests have been run by typing npm test into command line the following should appear:
+
+![Screenshot of tests being run](./assets/README6.png)
+
+## Walkthrough Video
+
+## Questions
+
+Please direct all questions to [Dan Lawrence](https://github.com/DanLawrence91)
