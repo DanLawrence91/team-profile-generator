@@ -9,7 +9,7 @@ const members = [];
 const finalHTMLArr = [];
 
 function managerHTML(manager) {
-  `<div class="card-deck">
+  return `<div class="card-deck">
     <div id="manager">
       <div class="card">
         <div class="card-body">
@@ -29,8 +29,7 @@ function managerHTML(manager) {
 }
 
 function engineerHTML(engineer) {
-  `
-    <div id="engineer">
+  return `<div id="engineer">
         <div class="card">
         <div class="card-body">
             <h4 class="card-title bg-primary">
@@ -51,7 +50,7 @@ function engineerHTML(engineer) {
 }
 
 function internHTML(intern) {
-  `<div id="intern">
+  return `<div id="intern">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title bg-primary">
@@ -69,8 +68,53 @@ function internHTML(intern) {
   </div>`;
 }
 
+function allEmpsHTML(finalArr) {
+  return `<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Team Profiles</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+          crossorigin="anonymous"
+        />
+      </head>
+    
+      <body>
+    
+        <header class="jumbotron jumbotron-fluid bg-warning">
+          <div class="container">
+            <h1 class="display-3 text-center">Team Name</h1>
+          </div>
+        </header>
+    
+       ${finalArr}
+    
+        <script
+          src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+          integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+          integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+          crossorigin="anonymous"
+        ></script>
+      </body>
+    </html>`;
+}
+
 function generateHTML(arr) {
-  for (var i = 0; i < arr; i++) {
+  for (var i = 0; i < arr.length; i++) {
     if (arr[i] == 'Manager') {
       finalHTMLArr.push(managerHTML(arr[i]));
     } else if (arr[i] == 'Engineer') {
@@ -79,53 +123,8 @@ function generateHTML(arr) {
       finalHTMLArr.push(internHTML(arr[i]));
     }
   }
-  function allEmpsHTML(finalHTMLArr) {
-    `<!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Team Profiles</title>
-            <link
-              rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-              integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-              crossorigin="anonymous"
-            />
-            <link rel="stylesheet" href="style.css" />
-          </head>
-        
-          <body>
-        
-            <header class="jumbotron jumbotron-fluid bg-warning">
-              <div class="container">
-                <h1 class="display-3 text-center">Team Name</h1>
-              </div>
-            </header>
-        
-           ${finalHTMLArr}
-        
-            <script
-              src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-              integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-              crossorigin="anonymous"
-            ></script>
-            <script
-              src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-              integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-              crossorigin="anonymous"
-            ></script>
-            <script
-              src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-              integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-              crossorigin="anonymous"
-            ></script>
-          </body>
-        </html>`;
-  }
-
-  allEmpsHTML(finalHTMLArr);
+  console.log(finalHTMLArr);
+  return allEmpsHTML(finalHTMLArr);
 }
 
 const basicQuestions = [
@@ -228,7 +227,6 @@ const engineerQuestions = [
 function askEngineerQuestions() {
   inquirer.prompt(engineerQuestions).then((data) => {
     const engineer = new Engineer(data.name, data.id, data.email, data.github);
-    console.log(engineer.getRole());
     members.push(engineer);
     if (data.add == 'Engineer') {
       askEngineerQuestions();
@@ -311,7 +309,6 @@ inquirer
       data.email,
       data.officeNumber
     );
-    console.log(manager.getRole());
     members.push(manager);
 
     if (data.add == 'Engineer') {
