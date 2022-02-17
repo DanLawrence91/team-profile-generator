@@ -17,11 +17,11 @@ function managerHTML(manager) {
             ${manager.getName()}<br />${manager.getRole()}
           </h4>
           <ul class="list-group">
-            <li class="list-group-item">${manager.getID()}</li>
-            <li class="list-group-item">
+            <li class="list-group-item">ID: ${manager.getID()}</li>
+            <li class="list-group-item">Email: 
               <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
             </li>
-            <li class="list-group-item">${manager.getOfficeNumber()}</li>
+            <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
           </ul>
         </div>
       </div>
@@ -36,11 +36,11 @@ function engineerHTML(engineer) {
             ${engineer.getName()}<br />${engineer.getRole()}
             </h4>
             <ul class="list-group">
-            <li class="list-group-item">${engineer.getID()}</li>
-            <li class="list-group-item">
+            <li class="list-group-item">ID: ${engineer.getID()}</li>
+            <li class="list-group-item"> Email: 
                 <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item"> GitHub: 
                 <a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a>
             </li>
             </ul>
@@ -57,11 +57,11 @@ function internHTML(intern) {
           ${intern.getName()}<br />${intern.getRole()}
         </h4>
         <ul class="list-group">
-          <li class="list-group-item">${intern.getID()}</li>
-          <li class="list-group-item">
+          <li class="list-group-item">ID: ${intern.getID()}</li>
+          <li class="list-group-item">Email: 
             <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
           </li>
-          <li class="list-group-item">${intern.getSchool()}</li>
+          <li class="list-group-item">School: ${intern.getSchool()}</li>
         </ul>
       </div>
     </div>
@@ -91,8 +91,9 @@ function allEmpsHTML(finalArr) {
             <h1 class="display-3 text-center">Team Name</h1>
           </div>
         </header>
-    
-       ${finalArr}
+        <div class="d-flex justify-content-center">
+            ${finalArr}
+        </div>
     
         <script
           src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -115,16 +116,19 @@ function allEmpsHTML(finalArr) {
 
 function generateHTML(arr) {
   for (var i = 0; i < arr.length; i++) {
-    if (arr[i] == 'Manager') {
+    // console.log(arr[i] instanceof Manager);
+    // console.log(arr[i] instanceof Engineer);
+    // console.log(arr[i] instanceof Intern);
+    if (arr[i] instanceof Manager) {
       finalHTMLArr.push(managerHTML(arr[i]));
-    } else if (arr[i] == 'Engineer') {
+    } else if (arr[i] instanceof Engineer) {
       finalHTMLArr.push(engineerHTML(arr[i]));
-    } else if (arr[i] == 'Intern') {
+    } else if (arr[i] instanceof Intern) {
       finalHTMLArr.push(internHTML(arr[i]));
     }
   }
-  console.log(finalHTMLArr);
-  return allEmpsHTML(finalHTMLArr);
+  //   console.log(finalHTMLArr);
+  return allEmpsHTML(finalHTMLArr.join(''));
 }
 
 const basicQuestions = [
@@ -233,7 +237,7 @@ function askEngineerQuestions() {
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      fs.writeFileSync('index.html', generateHTML(members));
+      fs.writeFileSync('./dist/index.html', generateHTML(members));
     }
   });
 }
@@ -295,7 +299,7 @@ function askInternQuestions() {
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      fs.writeFileSync('index.html', generateHTML(members));
+      fs.writeFileSync('./dist/index.html', generateHTML(members));
     }
   });
 }
@@ -316,7 +320,7 @@ inquirer
     } else if (data.add == 'Intern') {
       askInternQuestions();
     } else if (data.add == 'Finish') {
-      fs.writeFileSync('index.html', generateHTML(members));
+      fs.writeFileSync('./dist/index.html', generateHTML(members));
     }
   })
   .catch((err) => console.error(err));
